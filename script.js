@@ -1,6 +1,10 @@
 // Each book needs a title, author, pages, if it was read yet (boolean)
 const books = [];
-const booksDisplay = document.querySelector(".books")
+const booksDisplay = document.querySelector(".books");
+const bookForm = document.querySelector(".book-form");
+const closeForm = document.querySelector(".book-form > .close");
+const bookBtn = document.querySelector (".add-book");
+
 
 function Book(title, author, pages, read_yet) {
   this.title = title;
@@ -44,6 +48,24 @@ function addBookToLibrary(title, author, pages, read_yet) {
 
 addBookToLibrary("1984", "George Orwell", 328, false);
 addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 336, true);
+
+// So the form go in and out of the page
+bookBtn.addEventListener("click", () => { bookForm.showModal() });
+closeForm.addEventListener("click", () => { bookForm.close() });
+bookForm.addEventListener("submit", (e) => { // For when you submit the form, add a book, clear out the form, and close it
+  e.preventDefault();
+
+  const bookTitle = document.querySelector("#book-title");
+  const bookAuthor = document.querySelector("#book-author");
+  const bookPages = document.querySelector("#book-pages");
+  const bookReadYet = document.querySelector("#book-read-yet");
+  addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, bookReadYet.checked ); // "on" means the book was red
+  [bookTitle, bookAuthor, bookPages].forEach((atr) => atr.value = "");
+  bookReadYet.checked =  false;
+
+  bookForm.close();
+
+})
 
 
  

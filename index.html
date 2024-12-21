@@ -8,11 +8,42 @@
   <title>Library</title>
 </head>
 <body>
-
+  <header>
+    <button class="add-book">Add A Book!</button>
+  </header>
+  
   <main>
     <div class="books">
     </div>
   </main>
+
+  <dialog class="book-form">
+    <button class="close" autofocus>Close</button>
+    <form action="#" method="dialog">
+      <div>
+      <label for="book-title">Title:</label>
+      <input type="text" id="book-title" required>
+      </div>
+
+      <div>
+        <label for="book-author">Author:</label>
+        <input type="text" id="book-author" required>
+      </div>
+      
+      <div>
+        <label for="book-pages"># of Pages:</label>
+        <input type="number" id="book-pages"  required>
+      </div>
+
+      <div>
+        <label for="book-read-yet">Have you it yet?</label>
+        <input type="checkbox"  id="book-read-yet">
+      </div>
+
+      <button class="submit-book" formmethod="dialog">Submit</button>
+
+    </form>
+  </dialog>
   
 </body>
 </html>
