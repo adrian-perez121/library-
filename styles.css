@@ -34,3 +34,8 @@ header {
   padding-left: 10px;
 }
 
+.delete-btn {
+  width: 60px;
+  align-self: flex-end;
+}
+
