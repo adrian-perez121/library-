@@ -23,6 +23,11 @@ function deleteBook() { // Happens from inside one of the delete buttons
   displayBooks();
 }
 
+function toggleRead() { // Happens from the inside of the read button
+  books[this.getAttribute("book-index")].read_yet =! books[this.getAttribute("book-index")].read_yet;
+  displayBooks();
+}
+
 function createBookNode(book, i) {
   // Initialization
   let newBookContainer = document.createElement("div");
@@ -31,6 +36,7 @@ function createBookNode(book, i) {
   let pages = document.createElement("span");
   let read_yet = document.createElement("span");
   let deleteBtn = document.createElement("button")
+  let readBtn = document.createElement("button")
 
   // Add details
   newBookContainer.classList.add("book");
@@ -39,6 +45,7 @@ function createBookNode(book, i) {
   pages.classList.add("pages");
   read_yet.classList.add("read_yet");
   deleteBtn.classList.add("delete-btn");
+  readBtn.classList.add("read-btn")
 
 
   // Add content
@@ -48,11 +55,14 @@ function createBookNode(book, i) {
   read_yet.textContent = book.read_yet ? "The book has been read" : "This book has not been read yet";
   deleteBtn.textContent = "Delete";
   deleteBtn.setAttribute("book-index", i);
+  readBtn.setAttribute("book-index", i);
+  readBtn.textContent = book.read_yet ? "unread" : "read";
   
   // Put it all into place
-  [title, author, pages, read_yet, deleteBtn].forEach((attr) => { newBookContainer.append(attr)});
+  [title, author, pages, read_yet, readBtn, deleteBtn].forEach((attr) => { newBookContainer.append(attr)});
 
   deleteBtn.addEventListener("click", deleteBook);
+  readBtn.addEventListener("click", toggleRead);
 
   return newBookContainer;
 }

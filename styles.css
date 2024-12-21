@@ -4,6 +4,11 @@ header {
   padding: 10px 30px;
 }
 
+button {
+  appearance: none;
+  border: none;
+}
+
 .books {
   width: auto;
   display: grid;
@@ -34,8 +39,17 @@ header {
   padding-left: 10px;
 }
 
+.book > *:last-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit ;
+}
+
 .delete-btn {
-  width: 60px;
-  align-self: flex-end;
+  background-color: lightcoral;
+}
+
+
+.read-btn {
+  background-color: lightblue;
 }
 
