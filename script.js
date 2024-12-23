@@ -5,13 +5,14 @@ const bookForm = document.querySelector(".book-form");
 const closeForm = document.querySelector(".book-form > .close");
 const bookBtn = document.querySelector (".add-book");
 
-
-function Book(title, author, pages, read_yet) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read_yet = read_yet;
-} 
+class Book {
+  constructor(title, author, pages, read_yet) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read_yet = read_yet;
+  } 
+}
 
 function displayBooks() {
   while (booksDisplay.firstChild) { booksDisplay.removeChild(booksDisplay.firstChild)}; // This means we reload the books each time. Pretty inefficient
