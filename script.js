@@ -11,12 +11,52 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.read_yet = read_yet;
-  } 
+  }
+
+  
+  createBookNode(i) {
+      // Initialization
+      let newBookContainer = document.createElement("div");
+      let title = document.createElement("h1");
+      let author = document.createElement("span");
+      let pages = document.createElement("span");
+      let read_yet = document.createElement("span");
+      let deleteBtn = document.createElement("button")
+      let readBtn = document.createElement("button")
+
+      // Add details
+      newBookContainer.classList.add("book");
+      author.classList.add("author")
+      title.classList.add("title");
+      pages.classList.add("pages");
+      read_yet.classList.add("read_yet");
+      deleteBtn.classList.add("delete-btn");
+      readBtn.classList.add("read-btn")
+
+
+      // Add content
+      title.textContent = this.title ;
+      author.textContent = `By: ${this.author}`;
+      pages.textContent = `${this.pages} pages`;
+      read_yet.textContent = this.read_yet ? "The book has been read" : "This book has not been read yet";
+      deleteBtn.textContent = "Delete";
+      deleteBtn.setAttribute("book-index", i);
+      readBtn.setAttribute("book-index", i);
+      readBtn.textContent = this.read_yet ? "unread" : "read";
+      
+      // Put it all into place
+      [title, author, pages, read_yet, readBtn, deleteBtn].forEach((attr) => { newBookContainer.append(attr)});
+
+      deleteBtn.addEventListener("click", deleteBook);
+      readBtn.addEventListener("click", toggleRead);
+
+      return newBookContainer;
+  };
 }
 
 function displayBooks() {
   while (booksDisplay.firstChild) { booksDisplay.removeChild(booksDisplay.firstChild)}; // This means we reload the books each time. Pretty inefficient
-  books.forEach((book, i) => booksDisplay.appendChild(createBookNode(book, i)));
+  books.forEach((book, i) => booksDisplay.appendChild(book.createBookNode(i)));
 }
 
 function deleteBook() { // Happens from inside one of the delete buttons
@@ -29,44 +69,44 @@ function toggleRead() { // Happens from the inside of the read button
   displayBooks();
 }
 
-function createBookNode(book, i) {
-  // Initialization
-  let newBookContainer = document.createElement("div");
-  let title = document.createElement("h1");
-  let author = document.createElement("span");
-  let pages = document.createElement("span");
-  let read_yet = document.createElement("span");
-  let deleteBtn = document.createElement("button")
-  let readBtn = document.createElement("button")
+// function createBookNode(book, i) {
+//   // Initialization
+//   let newBookContainer = document.createElement("div");
+//   let title = document.createElement("h1");
+//   let author = document.createElement("span");
+//   let pages = document.createElement("span");
+//   let read_yet = document.createElement("span");
+//   let deleteBtn = document.createElement("button")
+//   let readBtn = document.createElement("button")
 
-  // Add details
-  newBookContainer.classList.add("book");
-  author.classList.add("author")
-  title.classList.add("title");
-  pages.classList.add("pages");
-  read_yet.classList.add("read_yet");
-  deleteBtn.classList.add("delete-btn");
-  readBtn.classList.add("read-btn")
+//   // Add details
+//   newBookContainer.classList.add("book");
+//   author.classList.add("author")
+//   title.classList.add("title");
+//   pages.classList.add("pages");
+//   read_yet.classList.add("read_yet");
+//   deleteBtn.classList.add("delete-btn");
+//   readBtn.classList.add("read-btn")
 
 
-  // Add content
-  title.textContent = book.title ;
-  author.textContent = `By: ${book.author}`;
-  pages.textContent = `${book.pages} pages`;
-  read_yet.textContent = book.read_yet ? "The book has been read" : "This book has not been read yet";
-  deleteBtn.textContent = "Delete";
-  deleteBtn.setAttribute("book-index", i);
-  readBtn.setAttribute("book-index", i);
-  readBtn.textContent = book.read_yet ? "unread" : "read";
+//   // Add content
+//   title.textContent = book.title ;
+//   author.textContent = `By: ${book.author}`;
+//   pages.textContent = `${book.pages} pages`;
+//   read_yet.textContent = book.read_yet ? "The book has been read" : "This book has not been read yet";
+//   deleteBtn.textContent = "Delete";
+//   deleteBtn.setAttribute("book-index", i);
+//   readBtn.setAttribute("book-index", i);
+//   readBtn.textContent = book.read_yet ? "unread" : "read";
   
-  // Put it all into place
-  [title, author, pages, read_yet, readBtn, deleteBtn].forEach((attr) => { newBookContainer.append(attr)});
+//   // Put it all into place
+//   [title, author, pages, read_yet, readBtn, deleteBtn].forEach((attr) => { newBookContainer.append(attr)});
 
-  deleteBtn.addEventListener("click", deleteBook);
-  readBtn.addEventListener("click", toggleRead);
+//   deleteBtn.addEventListener("click", deleteBook);
+//   readBtn.addEventListener("click", toggleRead);
 
-  return newBookContainer;
-}
+//   return newBookContainer;
+// }
 
 function addBookToLibrary(title, author, pages, read_yet) {
   books.push(new Book(title, author, pages, read_yet));
